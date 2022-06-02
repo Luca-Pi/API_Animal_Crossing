@@ -24,10 +24,12 @@ Route::middleware('auth:api')->get('user-fishes', 'FishesController@getFishesUse
 Route::middleware('auth:api')->post('has-fish-user', 'HasFishController@attachFishUser');
 Route::middleware('auth:api')->delete('has-fish-user-remove', 'HasFishController@detachFishUser');
 
+Route::middleware('auth:api')->get('insects/search', 'InsectController@searchInsects');
 Route::middleware('auth:api')->get('user-insects', 'InsectController@getInsectsUser');
 Route::middleware('auth:api')->post('has-insect-user', 'HasInsectController@attachInsectUser');
 Route::middleware('auth:api')->delete('has-insects-user-remove', 'HasInsectController@detachInsectUser');
 
+Route::middleware('auth:api')->get('sea-creatures/search', 'SeaCreaturesController@searchSeaCreatures');
 Route::middleware('auth:api')->get('user-sea-creatures', 'SeaCreaturesController@getSeaCreaturesUser');
 Route::middleware('auth:api')->post('has-sea-creature-user', 'HasSeaCreatureController@attachSeaCreatureUser');
 Route::middleware('auth:api')->delete('has-sea-creature-user-remove', 'HasSeaCreatureController@detachSeaCreatureUser');

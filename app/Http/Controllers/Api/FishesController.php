@@ -62,7 +62,7 @@ class FishesController extends Controller
             ->select('fishes.*');
 
         if ($filters['name'] !== null) {
-            $fishes->where('fishes.name', 'LIKE', $filters['name']);
+            $fishes->where('fishes.name', '=', $filters['name']);
         }
         if ($filters['hasFish'] === "true") {
             $fishes
