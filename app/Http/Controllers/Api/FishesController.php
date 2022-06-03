@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 
 class FishesController extends Controller
 {
-    /** @var PeriodService $periodService */
-    private $periodService;
+    private PeriodService $periodService;
 
     public function __construct(PeriodService $periodService)
     {
