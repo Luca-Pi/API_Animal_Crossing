@@ -16,8 +16,8 @@ class PublicationsFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title(),
-            'content' => $this->faker->paragraphs(3),
+            'title' => $this->faker->text(30),
+            'content' => $this->faker->paragraph(2),
             'category_id' => Category::all()->random(1)[0]->id,
             'user_id' => User::all()->random(1)[0]->id,
         ];
