@@ -16,7 +16,7 @@ class CommentariesFactory extends Factory
     public function definition()
     {
         return [
-            'content' => $this->faker->text(),
+            'content' => $this->faker->text(50),
             'user_id' => User::all()->random(1)[0]->id,
             'publication_id' => Publications::all()->random(1)[0]->id,
         ];

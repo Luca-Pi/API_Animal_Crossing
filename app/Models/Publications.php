@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Publications extends Model
 {
     use CrudTrait;
+    use HasFactory;
 
     protected $table = 'publications';
     protected $fillable = [

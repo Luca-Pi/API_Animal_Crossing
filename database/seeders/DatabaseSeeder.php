@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SeaCreaturesSeeder::class);
         $this->call(SetFurnituresSeeder::class);
         $this->call(BugsSeeder::class);
+        $this->call(CategoriesSeeder::class);
+        $this->call(ReactionsSeeder::class);
+        $this->call(PlatformsSeeder::class);
     }
 }

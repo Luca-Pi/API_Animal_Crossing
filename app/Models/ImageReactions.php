@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ImageReactions extends Model
 {
     use HasFactory;
+
+    protected $table = 'image_reactions';
+
+    protected $fillable = [
+        'label',
+        'image',
+    ];
 }
