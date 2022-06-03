@@ -11,4 +11,12 @@ class PublicationRepository{
     function getById(int $id){
         return Publications::where("id", $id)->first();
     }
+
+    function updateById(int $id,array $data){
+        return Publications::where("id", $id)->first()->update($data);
+    }
+
+    function deleteById(int $id){
+        return Publications::where("id", $id)->first()->delete();
+    }
 }

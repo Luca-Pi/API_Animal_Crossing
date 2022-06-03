@@ -17,16 +17,7 @@ class PublicationsController extends Controller
     function __construct(PublicationRepository $publicationRepository){
         $this->publicationRepository = $publicationRepository;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -56,61 +47,8 @@ class PublicationsController extends Controller
         return response()->json($publication);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePublicationsRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePublicationsRequest $request)
-    {
-        //
-    }
+    
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Publications  $publications
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Publications $publications)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Publications  $publications
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Publications $publications)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePublicationsRequest  $request
-     * @param  \App\Models\Publications  $publications
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePublicationsRequest $request, Publications $publications)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Publications  $publications
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Publications $publications)
-    {
-        //
-    }
     /**
      * Remove the specified resource from storage.
      *
@@ -129,10 +67,30 @@ class PublicationsController extends Controller
         return response()->json($this->publicationRepository->getById($id));
     }
 
-    
+    /**
+     * Remove the specified resource from storage.
+     *  @param int id
+     *  @return \Illuminate\Http\Response
+     */
+    public function updateById($id,Request $request){
+        $validated = $request->validate([
+            'title'=>"sometimes|max:15",
+            "content"=>"sometimes|min:10",
+            "category_id"=>"sometimes",
+            "user_id"=>"sometimes",
+            "image"=>"sometimes|mimes|max:3000"
+        ]);
+        return response()->json($this->publicationRepository->updateById($id,$validated));
+    }
 
-
-
-
+    /**
+     * Remove the specified resource from storage.
+     *  @param int id
+     *  @return \Illuminate\Http\Response
+     */
+    public function deleteById($id){
+       
+        return response()->json($this->publicationRepository->deleteById($id));
+    }
 
 }
