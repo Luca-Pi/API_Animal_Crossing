@@ -91,10 +91,10 @@ class FishesController extends Controller
             $idFishes = [];
             foreach ($allFishes as $fish) {
                 if ($this->periodService->isInPeriod($fish->period, $filters['period'])) {
-                    $idSeaCreatures[] = $fish->id;
+                    $idFishes[] = $fish->id;
                 }
             }
-            $fishes->whereIn('sea_creatures.id', $idFishes);
+            $fishes->whereIn('fishes.id', $idFishes);
         }
 
 
