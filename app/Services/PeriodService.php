@@ -30,7 +30,7 @@ class PeriodService
             return true;
         }
 
-        $periods = preg_split('/–|;|[\s]/', $periodCreature, -1, PREG_SPLIT_NO_EMPTY);
+        $periods = preg_split('/–|;|[\s]|-/', $periodCreature, -1, PREG_SPLIT_NO_EMPTY);
         $period = self::PERIODS[$periodSearch];
 
         for($i=0; $i < sizeof($periods); $i= $i+2) {
@@ -44,14 +44,13 @@ class PeriodService
 
             if (
                 (
-                    $startPeriod < $endPeriod &&
-                    $period > $startPeriod &&
-                    $period < $endPeriod
+                    $startPeriod <= $endPeriod &&
+                    $period >= $startPeriod &&
+                    $period <= $endPeriod
                 ) ||
                 (
-                    $startPeriod > $endPeriod &&
-                    $period < $startPeriod &&
-                    $period > $endPeriod
+                    $startPeriod >= $endPeriod &&
+                    ($period <= $endPeriod || $period >= $startPeriod)
                 )
             ) {
                 return true;

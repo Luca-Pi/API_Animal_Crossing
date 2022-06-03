@@ -5,11 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\HasSeaCreature;
 use App\Models\SeaCreatures;
+use App\Services\PeriodService;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class SeaCreaturesController extends Controller
 {
+    /** @var PeriodService $periodService */
+    private $periodService;
+
+    public function __construct(PeriodService $periodService)
+    {
+        $this->periodService = $periodService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,14 +68,14 @@ class SeaCreaturesController extends Controller
         $filters['period'] = $requestSearch['period'] !== '' ? $requestSearch['period'] : null;
 
         $seaCreatures = $seaCreatures
-            ->select('bugs.*');
+            ->select('sea_creatures.*');
 
         if ($filters['name'] !== null) {
-            $seaCreatures->where('bugs.name', '=', $filters['name']);
+            $seaCreatures->where('sea_creatures.name', '=', $filters['name']);
         }
         if ($filters['hasSeaCreature'] === "true") {
             $seaCreatures
-                ->leftJoin('has_sea_creatures', 'has_sea_creatures.sea_creature_id', '=', 'bugs.id')
+                ->leftJoin('has_sea_creatures', 'has_sea_creatures.sea_creature_id', '=', 'sea_creatures.id')
                 ->where('has_sea_creatures.user_id', '=', $user->id)
             ;
         } else if($filters['hasSeaCreature'] === "false") {
@@ -78,7 +87,14 @@ class SeaCreaturesController extends Controller
             $seaCreatures->whereNotIn('id', $seaCreaturesAcquired);
         }
         if ($filters['period'] !== null) {
-            $seaCreatures->where('bugs.n_availability', 'LIKE', '%' . $filters['period'] .'%');
+            $allSeaCreatures = SeaCreatures::all();
+            $idSeaCreatures = [];
+            foreach ($allSeaCreatures as $seaCreature) {
+                if ($this->periodService->isInPeriod($seaCreature->period, $filters['period'])) {
+                    $idSeaCreatures[] = $seaCreature->id;
+                }
+            }
+            $seaCreatures->whereIn('sea_creatures.id', $idSeaCreatures);
         }
 
         $seaCreatures = $seaCreatures->get();
