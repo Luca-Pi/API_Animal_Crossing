@@ -17,4 +17,6 @@ class Publications extends Model
         'category_id',
         'user_id'
     ];
+
+
 }

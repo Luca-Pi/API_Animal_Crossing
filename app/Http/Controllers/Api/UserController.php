@@ -33,6 +33,8 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         //
+
+
     }
 
     /**
@@ -72,22 +74,30 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
         $validated = $request->validate([
-            'username'=>"max:15",
-            "description"=>"nullable|min:10"
+            'username'=>"sometimes|max:15",
+            "description"=>"sometimes|min:10",
+            "image"=>"sometimes|mimes|max:3000"
         ]);
-        // On update l'utilisateur
         $user = $request->user();
+
+        if(isset($validated["image"])){
+            $newImageName = time()."_".$request->username.'.'.$request->image->extension();
+            $request->image->move(public_path('images'),$newImageName);
+            $user->image_url = $newImageName;
+        }
+        // On update l'utilisateur
+        //$user = $request->user()->update($validated);
+
         if(isset($validated["username"])){
-                $user->username = $validated["username"];
+                 $user->username = $validated["username"];
         }
         if(isset($validated["description"])){
-            $user->description = $validated["description"];
+             $user->description = $validated["description"];
         }
         if(isset($validated["favoriteSerie"])){
-            $user->set_furniture_id = $validated["favoriteSerie"];
+             $user->set_furniture_id = $validated["favoriteSerie"];
         }
-        
-        // On retourne la réponse JSON
+
         return response()->json($user);
     }
 }
