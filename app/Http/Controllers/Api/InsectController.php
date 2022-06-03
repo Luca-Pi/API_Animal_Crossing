@@ -7,10 +7,19 @@ use App\Models\HasInsect;
 use App\Models\Insect;
 use App\Models\LanguageData;
 use App\Models\User;
+use App\Services\PeriodService;
 use Illuminate\Http\Request;
 
 class InsectController extends Controller
 {
+    /** @var PeriodService $periodService */
+    private $periodService;
+
+    public function __construct(PeriodService $periodService)
+    {
+        $this->periodService = $periodService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,7 +85,14 @@ class InsectController extends Controller
             $insects->whereNotIn('id', $insectsAcquired);
         }
         if ($filters['period'] !== null) {
-            $insects->where('bugs.n_availability', 'LIKE', '%' . $filters['period'] .'%');
+            $allInsects = Insect::all();
+            $idInsects = [];
+            foreach ($allInsects as $insect) {
+                if ($this->periodService->isInPeriod($insect->n_availability, $filters['period'])) {
+                    $idInsects[] = $insect->id;
+                }
+            }
+            $insects->whereIn('bugs.id', $idInsects);
         }
 
         $insects = $insects->get();
