@@ -18,7 +18,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Anémone de mer';
-        $seaCreature['period'] = 'Toute l\'année';
+        $seaCreature['period'] = 'All year';
         $seaCreature['hours'] = 'Toute la journée';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Grande';
@@ -30,7 +30,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Balane';
-        $seaCreature['period'] = 'Toute l\'année';
+        $seaCreature['period'] = 'All year';
         $seaCreature['hours'] = 'Toute la journée';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Minuscule';
@@ -42,7 +42,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Bulot';
-        $seaCreature['period'] = 'Toute l\'année';
+        $seaCreature['period'] = 'All year';
         $seaCreature['hours'] = 'Toute la journée';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Petite';
@@ -54,7 +54,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Calmar luciole';
-        $seaCreature['period'] = 'Mars - Juin';
+        $seaCreature['period'] = 'Mar - Jun';
         $seaCreature['hours'] = '21h - 4h';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Minuscule';
@@ -66,7 +66,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Concombre de mer';
-        $seaCreature['period'] = 'Novembre - Avril';
+        $seaCreature['period'] = 'Nov - Apr';
         $seaCreature['hours'] = 'Toute la journée';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Moyenne';
@@ -78,7 +78,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Crabe de Dungeness';
-        $seaCreature['period'] = 'Novembre - Mair';
+        $seaCreature['period'] = 'Nov - May';
         $seaCreature['hours'] = 'Toute la journée';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Moyenne';
@@ -90,7 +90,7 @@ class SeaCreaturesSeeder extends Seeder
 
         $seaCreature = new SeaCreatures();
         $seaCreature['name'] = 'Crabe des neiges';
-        $seaCreature['period'] = 'Novembre - Avril';
+        $seaCreature['period'] = 'Nov - Apr';
         $seaCreature['hours'] = 'Toute la journée';
         $seaCreature['place'] = 'Océan';
         $seaCreature['size'] = 'Grande';

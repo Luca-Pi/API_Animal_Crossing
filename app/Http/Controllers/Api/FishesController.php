@@ -6,10 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Fishes;
 use App\Models\HasFish;
 use App\Models\User;
+use App\Services\PeriodService;
 use Illuminate\Http\Request;
 
 class FishesController extends Controller
 {
+    private PeriodService $periodService;
+
+    public function __construct(PeriodService $periodService)
+    {
+        $this->periodService = $periodService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +70,7 @@ class FishesController extends Controller
             ->select('fishes.*');
 
         if ($filters['name'] !== null) {
-            $fishes->where('fishes.name', 'LIKE', $filters['name']);
+            $fishes->where('fishes.name', '=', $filters['name']);
         }
         if ($filters['hasFish'] === "true") {
             $fishes
@@ -78,7 +86,14 @@ class FishesController extends Controller
             $fishes->whereNotIn('id', $fishes_acquired);
         }
         if ($filters['period'] !== null) {
-            $fishes->where('fishes.period', 'LIKE', '%' . $filters['period'] .'%');
+            $allFishes = Fishes::all();
+            $idFishes = [];
+            foreach ($allFishes as $fish) {
+                if ($this->periodService->isInPeriod($fish->period, $filters['period'])) {
+                    $idFishes[] = $fish->id;
+                }
+            }
+            $fishes->whereIn('fishes.id', $idFishes);
         }
 
 
