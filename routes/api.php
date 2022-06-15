@@ -34,9 +34,9 @@ Route::middleware('auth:api')->delete('has-sea-creature-user-remove', 'HasSeaCre
 
 Route::middleware('auth:api')->get('category', 'CategoryController@getAll');
 
+Route::middleware('auth:api')->post('publications', 'PublicationsController@create');
 Route::middleware('auth:api')->get('publications', 'PublicationsController@getAll');
 Route::middleware('auth:api')->get('publications/{id}', 'PublicationsController@getById');
-Route::middleware('auth:api')->post('publications', 'PublicationsController@create');
 Route::middleware('auth:api')->put('publications/{id}', 'PublicationsController@updateById');
 Route::middleware('auth:api')->delete('publications/{id}', 'PublicationsController@deleteById');
 

@@ -25,24 +25,30 @@ class PublicationsController extends Controller
      */
     public function create(Request $request)
     {
+        //var_dump($request);
         $validated = $request->validate([
-            'title'=>"sometimes|max:15",
-            "content"=>"sometimes|min:10",
+            "title"=>"sometimes|max:15",
+            "content"=>"sometimes",
             "category_id"=>"required",
             "user_id"=>"required",
-            "image"=>"sometimes|mimes|max:3000"
-
+            "image"=>"sometimes|image|max:3000"
         ]);
-        $publication = new Publications();
+        $publication = new Publications($request->all());
 
         if(isset($validated["image"])){
-            $newImageName = time()."_".$request->title.'.'.$request->image->extension();
-            Storage::disk('local')->put($newImageName, $request->image);
+            $newImageName = time()."_".$request->title.'.'.$validated["image"]->extension();
+            Storage::disk('local')->put($newImageName, $validated["image"]);
             $publication->image_url = $newImageName;
         }
-        $publication->title = $validated["title"];
-        $publication->content = $validated["content"];
+        //$publication->image_url = "TEST";
+        if(isset($validated["title"])){
+            $publication->title = $validated["title"];
+        }
+        if(isset($validated["content"])){
+            $publication->content = $validated["content"];
+        }
         $publication->category_id = $validated["category_id"];
+        // var_dump($publication);
         $publication->save();
         return response()->json($publication);
     }

@@ -15,7 +15,8 @@ class Publications extends Model
         'title',
         'content',
         'category_id',
-        'user_id'
+        'user_id',
+        'image_url'
     ];
 
 
