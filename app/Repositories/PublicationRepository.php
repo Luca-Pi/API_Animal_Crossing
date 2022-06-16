@@ -13,6 +13,10 @@ class PublicationRepository{
     }
 
     function updateById(int $id,array $data){
+        if(isset($data["image"])){
+            $newImageName = Storage::disk('public')->put('publications', $validated["image"]);
+            $data->image_url = Storage::url($newImageName);
+        }
         return Publications::where("id", $id)->first()->update($data);
     }
 

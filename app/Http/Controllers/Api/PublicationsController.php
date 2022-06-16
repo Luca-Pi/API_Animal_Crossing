@@ -85,6 +85,7 @@ class PublicationsController extends Controller
             "user_id"=>"sometimes",
             "image"=>"sometimes|mimes|max:3000"
         ]);
+        
         return response()->json($this->publicationRepository->updateById($id,$validated));
     }
 

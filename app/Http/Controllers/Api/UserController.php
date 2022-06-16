@@ -81,9 +81,8 @@ class UserController extends Controller
         $user = $request->user();
 
         if(isset($validated["image"])){
-            $newImageName = time()."_".$request->username.'.'.$request->image->extension();
-            $request->image->move(public_path('images'),$newImageName);
-            $user->image_url = $newImageName;
+            $newImageName = Storage::disk('public')->put('publications', $validated["image"]);
+            $user->image_url = Storage::url($newImageName);
         }
         // On update l'utilisateur
         //$user = $request->user()->update($validated);
