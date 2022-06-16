@@ -36,9 +36,8 @@ class PublicationsController extends Controller
         $publication = new Publications($request->all());
 
         if(isset($validated["image"])){
-            $newImageName = time()."_".$request->title.'.'.$validated["image"]->extension();
-            Storage::disk('local')->put($newImageName, $validated["image"]);
-            $publication->image_url = $newImageName;
+            $newImageName = Storage::disk('public')->put('publications', $validated["image"]);
+            $publication->image_url = Storage::url($newImageName);
         }
         //$publication->image_url = "TEST";
         if(isset($validated["title"])){
