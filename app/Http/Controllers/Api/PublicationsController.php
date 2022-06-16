@@ -27,7 +27,7 @@ class PublicationsController extends Controller
     {
         //var_dump($request);
         $validated = $request->validate([
-            "title"=>"sometimes|max:15",
+            "title"=>"sometimes|max:50",
             "content"=>"sometimes",
             "category_id"=>"required",
             "user_id"=>"required",
@@ -38,6 +38,7 @@ class PublicationsController extends Controller
         if(isset($validated["image"])){
             $newImageName = Storage::disk('public')->put('publications', $validated["image"]);
             $publication->image_url = Storage::url($newImageName);
+            //$publication->image_url = 'oui';
         }
         //$publication->image_url = "TEST";
         if(isset($validated["title"])){
@@ -47,7 +48,6 @@ class PublicationsController extends Controller
             $publication->content = $validated["content"];
         }
         $publication->category_id = $validated["category_id"];
-        // var_dump($publication);
         $publication->save();
         return response()->json($publication);
     }
