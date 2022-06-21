@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
 use App\Models\Places;
 use App\Http\Requests\StorePlacesRequest;
 use App\Http\Requests\UpdatePlacesRequest;
@@ -15,7 +15,11 @@ class PlacesController extends Controller
      */
     public function index()
     {
-        //
+        $Places = Places::all();
+
+        // On retourne les informations des fossiles en JSON
+        return response()->json($Places);
+
     }
 
     /**
@@ -47,10 +51,6 @@ class PlacesController extends Controller
      */
     public function show(Places $places)
     {
-        $Places = Places::all();
-
-        // On retourne les informations des fossiles en JSON
-        return response()->json($Places);
     
     }
 

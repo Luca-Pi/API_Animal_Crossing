@@ -27,6 +27,8 @@ class CreateHasFossilsTable extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('has_fossils');
+        
     }
 }
