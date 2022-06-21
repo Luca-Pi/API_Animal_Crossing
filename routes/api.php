@@ -48,6 +48,6 @@ Route::middleware('auth:api')->apiResource("sea_creatures", "SeaCreaturesControl
 Route::middleware('auth:api')->apiResource("has_fish", "HasFishController");
 Route::middleware('auth:api')->apiResource("set_furnitures", "SetFurnitureController");
 
-/*Route::middleware('auth:api')->apiResource("users", "UserController")->except(['store', 'destroy', 'update']);*/
+Route::middleware('auth:api')->apiResource("users", "UserController")->except(['store', 'destroy', 'update']);
 
 Route::middleware('auth:api')->get('me', 'UserController@show')->name('api.user.show');
